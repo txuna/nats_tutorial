@@ -18,5 +18,16 @@ func Run(url string) {
 		log.Fatal(err)
 	}
 
-	_ = nc
+	js, err := nc.JetStream()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	streamName := "game_stream"
+	stream, err := js.StreamInfo(streamName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println(stream)
 }
